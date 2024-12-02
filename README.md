@@ -13,7 +13,7 @@ I'm an Android Developer passionate about creating functional, polished mobile a
 
 - A mini choose-your-own-adventure game
 - Expanding my PokeBerry app to implement advanced navigation and improve UI design
-- Exploring asynchronous data handling and real-time user interactions
+- Exploring data handling with network requests through use of Retrofit and GSON
   
 ## 📚 What I Studied
 
