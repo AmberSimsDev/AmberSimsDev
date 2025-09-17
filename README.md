@@ -10,12 +10,18 @@ I'm an Android Developer passionate about creating functional, polished mobile a
 - API Integration with tools like Retrofit and GSON for dynamic data handling
   
 ## 🔄 Currently Working On
+- Learning and integrating clean architecture in my app projects
+- Exploring data handling and equipping current projects with more network requests through use of Retrofit and GSON
+- A mini choose-your-own-adventure game ✅
+- Expanding my PokeBerry app to implement advanced navigation and improve UI design ✅
 
-- A mini choose-your-own-adventure game
-- Expanding my PokeBerry app to implement advanced navigation and improve UI design
-- Exploring data handling with network requests through use of Retrofit and GSON
-  
 ## 📚 What I Studied
+- Metas Android Developer Professional Certificate Courses (April -September 2025):
+  -Introduction to Android Mobile Application Development
+  -Programming Fundamentals in Kotlin
+  -Advanced Programming in Kotlin 
+  -Working with Data in Android 
+
 
 - Kotlin Basics and Advanced Concepts via Codecademy's Kotlin course (completed in September 2023)
 - Android App Development through a comprehensive Udemy course covering Firebase, networking, device features, and more
