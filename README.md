@@ -17,10 +17,10 @@ I'm an Android Developer passionate about creating functional, polished mobile a
 
 ## 📚 What I Studied
 - Metas Android Developer Professional Certificate Courses (April -September 2025):
-  -Introduction to Android Mobile Application Development
-  -Programming Fundamentals in Kotlin
-  -Advanced Programming in Kotlin 
-  -Working with Data in Android 
+  *  Introduction to Android Mobile Application Development
+  *  Programming Fundamentals in Kotlin
+  *  Advanced Programming in Kotlin 
+  *  Working with Data in Android 
 
 
 - Kotlin Basics and Advanced Concepts via Codecademy's Kotlin course (completed in September 2023)
