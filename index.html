@@ -504,17 +504,21 @@
 
     /*AVATAR RING */
     .avatar-ring {
-  width: 110px;
-  height: 110px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  ...
+  border: 3px solid var(--rose);
+  padding: 3px;
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  flex-shrink: 0;
 }
 
 .avatar-inner {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  ...
+  overflow: hidden;
+  background: var(--brown);
 }
     /* ── RESPONSIVE ── */
     @media (max-width: 780px) {
@@ -549,9 +553,10 @@
 <section class="hero">
   <div class="hero-sidebar">
     <div class="avatar-ring">
-      <div class="avatar-inner">
-         <img src="assets/img/GitHub Photo.jpg" alt="Amber Sims" style="object-fit:cover;">
-    </div>
+  <div class="avatar-inner">
+    <img src="assets/img/GitHub Photo.jpg" alt="Amber Sims" style="width:100%; height:100%; object-fit:cover; display:block;">
+  </div>
+</div>
     <h1>Amber Sims</h1>
     <span class="handle">@AmberSimsDev</span>
     <div class="badge-row">
