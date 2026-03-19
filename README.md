@@ -9,7 +9,7 @@
 
 I'm an **Android Developer** based in Madrid 🇪🇸, passionate about building functional, polished mobile applications with **Kotlin** and **Jetpack Compose**. I love diving into clean architecture and creating smooth, responsive user experiences.
 
-🌐 **[View my full portfolio site →](https://AmberSimsDev.github.io)**
+🌐 **[View my full portfolio site →](https://ambersimsdev.github.io/AmberSimsDev/)**
 
 ---
 
