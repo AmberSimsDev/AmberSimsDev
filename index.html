@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amber Sims | Android Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brown:   #403839;
+      --rose:    #CA7C72;
+      --sage:    #9DA069;
+      --mauve:   #9F90A2;
+      --cream:   #F7F3EF;
+      --warm-white: #FDFAF7;
+      --light-rose: #F2DDD9;
+      --light-mauve: #EDE8F0;
+      --light-sage: #EEF0E6;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--brown);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER BANNER ── */
+    .site-header {
+      background: var(--brown);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 52px;
+      border-bottom: 2px solid var(--rose);
+    }
+
+    .site-header nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      margin-left: 1.8rem;
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .site-header nav a:hover { opacity: 1; color: var(--rose); }
+    .site-header .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+    }
+    .site-header .logo span { color: var(--rose); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--brown);
+      color: var(--cream);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(159,144,162,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-sidebar {
+      background: rgba(255,255,255,0.04);
+      border-right: 1px solid rgba(255,255,255,0.1);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .avatar-ring {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--rose);
+      padding: 3px;
+      background: linear-gradient(135deg, var(--rose), var(--mauve));
+      flex-shrink: 0;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--rose);
+    }
+
+    .hero-sidebar h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .hero-sidebar .handle {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--rose);
+      letter-spacing: 0.08em;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+    }
+
+    .badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+    .badge-rose   { background: rgba(202,124,114,0.2); color: var(--rose); border: 1px solid rgba(202,124,114,0.4); }
+    .badge-sage   { background: rgba(157,160,105,0.2); color: var(--sage);  border: 1px solid rgba(157,160,105,0.4); }
+    .badge-mauve  { background: rgba(159,144,162,0.2); color: var(--mauve); border: 1px solid rgba(159,144,162,0.4); }
+
+    .hero-sidebar .joined {
+      font-size: 0.72rem;
+      opacity: 0.5;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .hero-main {
+      padding: 2.5rem 3rem;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-main h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-main p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      opacity: 0.82;
+      max-width: 520px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary   { background: var(--rose); color: var(--warm-white); }
+    .btn-primary:hover { background: #b8655b; }
+    .btn-secondary { border-color: rgba(255,255,255,0.3); color: var(--cream); }
+    .btn-secondary:hover { border-color: var(--mauve); color: var(--mauve); }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      max-width: 1100px;
+      margin: 0 auto;
+      gap: 0;
+      padding-bottom: 4rem;
+    }
+
+    /* ── LEFT SIDEBAR ── */
+    .left-sidebar {
+      padding: 2rem 1.5rem 2rem 2rem;
+      border-right: 1px solid rgba(64,56,57,0.12);
+    }
+
+    .sidebar-section {
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-section h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mauve);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--light-mauve);
+    }
+
+    .skill-tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.22rem 0.65rem;
+      margin: 0.2rem 0.15rem;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .skill-kotlin  { background: var(--light-mauve); color: var(--brown); border-color: rgba(159,144,162,0.4); }
+    .skill-sage    { background: var(--light-sage);  color: var(--brown); border-color: rgba(157,160,105,0.4); }
+    .skill-rose    { background: var(--light-rose);  color: var(--brown); border-color: rgba(202,124,114,0.4); }
+
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed rgba(64,56,57,0.1);
+      font-size: 0.82rem;
+    }
+
+    .lang-level {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--rose);
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--brown);
+      text-decoration: none;
+      padding: 0.3rem 0;
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .contact-link:hover { opacity: 1; color: var(--rose); }
+    .contact-icon {
+      width: 16px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      padding: 2rem 2.5rem;
+    }
+
+    /* tab-style nav */
+    .content-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid rgba(64,56,57,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .tab {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.2rem;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--brown);
+      opacity: 0.5;
+      transition: all 0.2s;
+    }
+    .tab.active { opacity: 1; border-bottom-color: var(--rose); color: var(--rose); }
+    .tab:hover  { opacity: 0.85; }
+
+    /* Experience card */
+    .exp-card {
+      background: var(--warm-white);
+      border: 1px solid rgba(64,56,57,0.08);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .exp-card:hover { box-shadow: 0 4px 20px rgba(64,56,57,0.07); border-color: rgba(159,144,162,0.3); }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--mauve);
+      border-radius: 4px 0 0 4px;
+    }
+    .exp-card.rose::before { background: var(--rose); }
+    .exp-card.sage::before  { background: var(--sage); }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .exp-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--rose);
+      text-align: right;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    .exp-company {
+      font-size: 0.8rem;
+      color: var(--mauve);
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+    }
+
+    .exp-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .exp-card ul li {
+      font-size: 0.82rem;
+      padding: 0.22rem 0;
+      padding-left: 1.1rem;
+      position: relative;
+      opacity: 0.85;
+    }
+    .exp-card ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--rose);
+      font-weight: bold;
+    }
+
+    /* Project card */
+    .project-card {
+      background: var(--warm-white);
+      border: 1px solid rgba(64,56,57,0.08);
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      transition: box-shadow 0.2s;
+    }
+    .project-card:hover { box-shadow: 0 4px 20px rgba(64,56,57,0.07); }
+
+    .project-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.6rem;
+    }
+
+    .tech-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      background: var(--light-sage);
+      color: var(--brown);
+      border: 1px solid rgba(157,160,105,0.3);
+    }
+
+    .project-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--light-rose);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      align-self: start;
+    }
+
+    /* Education */
+    .edu-item {
+      padding: 1rem 0;
+      border-bottom: 1px dashed rgba(64,56,57,0.12);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .edu-school {
+      font-size: 0.8rem;
+      color: var(--mauve);
+      margin-top: 0.15rem;
+    }
+    .edu-loc {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--rose);
+      text-align: right;
+    }
+
+    /* Section heading inside main */
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(64,56,57,0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .section-heading .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--rose);
+      flex-shrink: 0;
+    }
+    .section-heading.sage .dot { background: var(--sage); }
+    .section-heading.mauve .dot { background: var(--mauve); }
+
+    /* spacer between sections */
+    .section-gap { margin-bottom: 2.5rem; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--brown);
+      color: rgba(247,243,239,0.5);
+      text-align: center;
+      padding: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+    }
+    .site-footer a { color: var(--rose); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 780px) {
+      .hero, .page-body {
+        grid-template-columns: 1fr;
+      }
+      .hero-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .left-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(64,56,57,0.12);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <span class="logo">Amber<span>.</span>dev</span>
+  <nav>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="mailto:asims1147@gmail.com">Contact</a>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-sidebar">
+    <div class="avatar-ring">
+      <div class="avatar-inner">A</div>
+    </div>
+    <h1>Amber Sims</h1>
+    <span class="handle">@AmberSimsDev</span>
+    <div class="badge-row">
+      <span class="badge badge-rose">Android Dev</span>
+      <span class="badge badge-sage">Kotlin</span>
+      <span class="badge badge-mauve">Jetpack Compose</span>
+    </div>
+    <span class="joined">📍 Madrid, ES</span>
+  </div>
+  <div class="hero-main">
+    <div class="section-label">:: about me</div>
+    <h2>Building polished<br><em>Android experiences</em></h2>
+    <p>I'm an Android Developer passionate about creating functional, polished mobile applications. I enjoy diving into Kotlin and Jetpack Compose to build smooth, responsive user experiences — and I'm always expanding my skills through real projects and professional mentorship.</p>
+    <div class="cta-row">
+      <a href="https://www.linkedin.com/in/sims-amber/" class="btn btn-primary" target="_blank">LinkedIn ↗</a>
+      <a href="mailto:asims1147@gmail.com" class="btn btn-secondary">asims1147@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── BODY ── -->
+<div class="page-body">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="left-sidebar">
+
+    <div class="sidebar-section">
+      <h3>Programming</h3>
+      <span class="skill-tag skill-kotlin">Kotlin</span>
+      <span class="skill-tag skill-kotlin">Jetpack Compose</span>
+      <span class="skill-tag skill-kotlin">XML</span>
+      <span class="skill-tag skill-sage">Python</span>
+      <span class="skill-tag skill-sage">HTML</span>
+      <span class="skill-tag skill-sage">CSS</span>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Android</h3>
+      <span class="skill-tag skill-rose">Retrofit</span>
+      <span class="skill-tag skill-rose">GSON</span>
+      <span class="skill-tag skill-rose">Coil</span>
+      <span class="skill-tag skill-rose">REST APIs</span>
+      <span class="skill-tag skill-rose">Firebase</span>
+      <span class="skill-tag skill-rose">Git</span>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Design Tools</h3>
+      <span class="skill-tag skill-kotlin">Figma</span>
+      <span class="skill-tag skill-kotlin">Photoshop</span>
+      <span class="skill-tag skill-kotlin">Illustrator</span>
+      <span class="skill-tag skill-sage">InDesign</span>
+      <span class="skill-tag skill-sage">Canva</span>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Languages</h3>
+      <div class="lang-item">
+        <span>English</span>
+        <span class="lang-level">Native</span>
+      </div>
+      <div class="lang-item">
+        <span>Spanish</span>
+        <span class="lang-level">B2</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Current Obsessions</h3>
+      <div style="font-size:0.8rem; opacity:0.75; line-height:2;">
+        <div><span style="color:var(--sage)">↳</span> Clean Architecture</div>
+        <div><span style="color:var(--rose)">↳</span> Kotlin Multiplatform</div>
+        <div><span style="color:var(--mauve)">↳</span> Retrofit + GSON</div>
+        <div><span style="color:var(--sage)">↳</span> Community Building</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Contact</h3>
+      <a href="mailto:asims1147@gmail.com" class="contact-link">
+        <span class="contact-icon">✉</span> asims1147@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/sims-amber/" class="contact-link" target="_blank">
+        <span class="contact-icon">in</span> sims-amber
+      </a>
+      <a href="https://github.com/AmberSimsDev" class="contact-link" target="_blank">
+        <span class="contact-icon">⌥</span> AmberSimsDev
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <div class="content-tabs">
+      <span class="tab active">Posts</span>
+      <a href="#experience" class="tab">Experience</a>
+      <a href="#projects" class="tab">Projects</a>
+      <a href="#education" class="tab">Education</a>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div id="experience" class="section-gap">
+      <div class="section-heading">
+        <div class="dot"></div>
+        Experience
+      </div>
+
+      <div class="exp-card rose">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Android Developer Trainee</div>
+            <div class="exp-company">Mentorship Program</div>
+          </div>
+          <div class="exp-meta">Madrid, ES<br>Sept 2023 – Present</div>
+        </div>
+        <ul>
+          <li>Developed native Android apps using Kotlin with activities, fragments, navigation, and XML-based UI layouts</li>
+          <li>Integrated REST APIs and handled JSON parsing using Retrofit and GSON for dynamic content</li>
+          <li>Applied clean code principles and layered architecture for readability and maintainability</li>
+          <li>Practiced Git-based collaboration: branching, pull requests, and code review workflows</li>
+          <li>Debugged functional and UI issues using Android Studio tools, logs, and systematic testing</li>
+          <li>Growing expertise in Jetpack Compose and Kotlin Multiplatform</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Virtual Assistant / Operations Support</div>
+            <div class="exp-company">Self-Employed</div>
+          </div>
+          <div class="exp-meta">Madrid, ES<br>Mar 2024 – Present</div>
+        </div>
+        <ul>
+          <li>Managed complex schedules, coordination, and follow-ups using structured digital workflows</li>
+          <li>Maintained task tracking systems and documentation ensuring clarity and accountability</li>
+          <li>Adapted communication style across technical and non-technical stakeholder contexts</li>
+          <li>Created and maintained operational spreadsheets, streamlining processes and reducing friction</li>
+        </ul>
+      </div>
+
+      <div class="exp-card sage">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Co-Organizer</div>
+            <div class="exp-company">DevMad</div>
+          </div>
+          <div class="exp-meta">Madrid, ES<br>Jan 2026 – Present</div>
+        </div>
+        <ul>
+          <li>Supports event planning, logistics, and vendor coordination for the developer community</li>
+          <li>Built and maintained spreadsheets to track venues, vendors, availability, and event timelines</li>
+          <li>Streamlined outreach and coordination processes for consistency and efficiency</li>
+          <li>Collaborated with developers and organizers to support knowledge sharing and community growth</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="projects" class="section-gap">
+      <div class="section-heading sage">
+        <div class="dot"></div>
+        Personal Projects
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-name">PokéBerry App</div>
+          <p style="font-size:0.82rem; opacity:0.8; margin-top:0.3rem;">
+            Android application built using clean architecture in Android Studio with a Pokémon-themed open source API. Users can scroll through a list of Pokémon berries. UI developed with Jetpack Compose; Retrofit handles REST API calls and Coil manages image loading.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">Kotlin</span>
+            <span class="tech-pill">Jetpack Compose</span>
+            <span class="tech-pill">Retrofit</span>
+            <span class="tech-pill">GSON</span>
+            <span class="tech-pill">Coil</span>
+            <span class="tech-pill">Clean Architecture</span>
+          </div>
+        </div>
+        <div class="project-icon">🍓</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-name">Adventure Game App</div>
+          <p style="font-size:0.82rem; opacity:0.8; margin-top:0.3rem;">
+            Android choose-your-own-adventure game built with clean architecture in Android Studio and Jetpack Compose. Users navigate to different outcomes and earn points. Planned using a mind-map in Figma.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">Kotlin</span>
+            <span class="tech-pill">Jetpack Compose</span>
+            <span class="tech-pill">Android Studio</span>
+            <span class="tech-pill">Figma</span>
+            <span class="tech-pill">Clean Architecture</span>
+          </div>
+        </div>
+        <div class="project-icon">🗺️</div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div id="education" class="section-gap">
+      <div class="section-heading mauve">
+        <div class="dot"></div>
+        Education &amp; Certifications
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">Master's — International Education</div>
+          <div class="edu-school">Instituto Franklin (UAH)</div>
+        </div>
+        <div class="edu-loc">Madrid, ES</div>
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">BA, Media Studies</div>
+          <div class="edu-school">Kalamazoo College<br>
+            <span style="font-size:0.75rem; opacity:0.7;">Intro Computer Science · ComSci Pictures/Sound</span>
+          </div>
+        </div>
+        <div class="edu-loc">Kalamazoo, MI</div>
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">Meta Android Developer Professional Certificate</div>
+          <div class="edu-school" style="font-size:0.75rem; opacity:0.7; line-height:1.8;">
+            Intro to Android Development · Programming Fundamentals in Kotlin<br>
+            Advanced Programming in Kotlin · Working with Data in Android
+          </div>
+        </div>
+        <div class="edu-loc">Apr – Sep 2025</div>
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">Android App Development — Udemy</div>
+          <div class="edu-school" style="font-size:0.75rem; opacity:0.7;">Firebase, networking, device features &amp; more</div>
+        </div>
+        <div class="edu-loc">Ongoing</div>
+      </div>
+
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">Kotlin — Codecademy</div>
+          <div class="edu-school" style="font-size:0.75rem; opacity:0.7;">Basics &amp; Advanced Concepts</div>
+        </div>
+        <div class="edu-loc">Sep 2023</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  Built with care by <a href="https://github.com/AmberSimsDev">Amber Sims</a> · Open to opportunities &amp; collaborations
+</footer>
+
+</body>
+</html>

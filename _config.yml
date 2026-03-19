@@ -1,2 +1,18 @@
-title: Amber Sims
-theme: jekyll-theme-minimal
+# GitHub Pages Configuration
+# This config tells GitHub Pages to use your custom HTML instead of a Jekyll theme
+
+title: Amber Sims | Android Developer
+description: Android Developer based in Madrid, ES — Kotlin, Jetpack Compose, Clean Architecture
+url: "https://AmberSimsDev.github.io"
+
+# Use "null" theme so GitHub Pages serves your custom index.html directly
+theme: null
+
+# Exclude files from Jekyll build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+# Plugins (optional, safe defaults)
+plugins: []
